@@ -7,13 +7,20 @@ class LogsSingleton {
     protected static LogsSingleton $instancia;
 
     public function gravaLog(array $dados): void {
-        $nomeArquivo = 'logs.txt';
-        $logsAnteriores = [];
+        $sNomeArquivo = 'logs.txt';
+        $aLogsAnteriores = [];
 
-        if (filesize($nomeArquivo) > 0) {
-            
+        if (filesize($sNomeArquivo) > 0) {
+            $sConteudoArquivo = file_get_contents($sNomeArquivo);
+
+            $aLogsAnteriores = json_decode($sConteudoArquivo, true);
         }
 
+        $aLogsAnteriores[] = $dados;
+        $xArquivo = fopen($sNomeArquivo, 'w');
+
+        fwrite($xArquivo, json_encode($aLogsAnteriores));
+        fclose($xArquivo);
     }
 
 }
