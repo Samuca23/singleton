@@ -6,7 +6,14 @@ class LogsSingleton {
 
     protected static LogsSingleton $instancia;
 
-    public function gravaLog(array $dados): void {
+    /**
+     * Grava o log em um arquivo txt
+     *
+     * @param array $dados
+     * @return void
+     */
+    public function gravaLog(array $dados): void 
+    {
         $sNomeArquivo = 'logs.txt';
         $aLogsAnteriores = [];
 
@@ -23,7 +30,21 @@ class LogsSingleton {
         fclose($xArquivo);
     }
 
-}
+    /**
+     * Retorna uma nova instância de LogsSingleton, porém como
+     * esta dentro da classe pode ser chamado como new self()
+     *
+     * @return self
+     */
+    public static function obterInstancia(): self 
+    {
+        if (empty(self::$instancia)) {
+            self::$instancia = new self();
+        }
 
+        return self::$instancia;
+    }
+
+}
 
 ?>
