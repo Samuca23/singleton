@@ -6,6 +6,21 @@ class LogsSingleton {
 
     protected static LogsSingleton $instancia;
 
+    private function __construct()
+    {
+        
+    }
+
+    private function __clone()
+    {
+        
+    }
+
+    public function __wakeup()
+    {
+        
+    }
+
     /**
      * Grava o log em um arquivo txt
      *
